@@ -78,7 +78,7 @@ Duração estimada: **3 a 5 minutos**.
 - **Iluminação (leve para o Quest):**
   - **luz ambiente:** gradiente quente;
   - **direcional quente** (#FFE2B8): Mixed (Subtractive), entra pela porta;
-  - **lightmap baked** (Progressive GPU, 12 texels/unidade, um só de 512 px): inclui as luminárias emissivas do teto, um spot suave sobre a mesa e uma luz de preenchimento, sem custo em tempo real;
+  - **lightmap baked** (Progressive GPU, 12 texels/unidade, um só de 512 px): inclui as luminárias emissivas do teto, um spot suave sobre a mesa, um spot de destaque na parede da fissura e uma luz de preenchimento, sem custo em tempo real;
   - **probes:** 57 Light Probes e 1 Reflection Probe para os objetos dinâmicos;
   - **em tempo real:** só a direcional, com sombra de 1024 px e alcance curto, e a luz da lâmpada consertada.
 - **Hardware alvo:** Meta Quest 2 (testado no XR Device Simulator).

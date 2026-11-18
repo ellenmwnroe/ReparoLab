@@ -140,7 +140,7 @@ public static class IluminacaoReparoLab
                 l.lightmapBakeType = LightmapBakeType.Realtime;
                 EditorUtility.SetDirty(l);
             }
-            else if (l.name == NomeSpotMesa || l.name == NomePreenchimento)
+            else if (l.name == NomeSpotMesa || l.name == NomePreenchimento || l.name == NomeDestaqueFissura)
             {
                 l.gameObject.SetActive(false); // luzes baked não fazem nada sem bake
             }
@@ -293,11 +293,12 @@ public static class IluminacaoReparoLab
             Color base_ = new Color(0.95f, 0.92f, 0.86f);
             mat.SetColor("_BaseColor", base_);
             mat.color = base_;
-            mat.EnableKeyword("_EMISSION");
-            mat.SetColor("_EmissionColor", new Color(1f, 0.93f, 0.8f) * 1.6f); // ilumina o bake; na tela fica branco quente (HDR desligado: sem bloom)
-            mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.BakedEmissive;
             AssetDatabase.CreateAsset(mat, caminho);
         }
+        mat.EnableKeyword("_EMISSION");
+        mat.SetColor("_EmissionColor", new Color(1f, 0.93f, 0.8f) * 2.2f); // ilumina o bake; na tela fica branco quente (HDR desligado: sem bloom)
+        mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.BakedEmissive;
+        EditorUtility.SetDirty(mat);
 
         var nomes = new List<string>();
         foreach (var r in lab.GetComponentsInChildren<MeshRenderer>(true))
@@ -321,6 +322,7 @@ public static class IluminacaoReparoLab
 
     const string NomeSpotMesa = "Spot Mesa (baked)";
     const string NomePreenchimento = "Luz Preenchimento (baked)";
+    const string NomeDestaqueFissura = "Destaque Fissura (baked)";
 
     static void CriarLuzesBaked(Transform raiz, Transform mesa, Vector3 inicio, StringBuilder log)
     {
@@ -346,12 +348,32 @@ public static class IluminacaoReparoLab
         fill.type = LightType.Point;
         fill.lightmapBakeType = LightmapBakeType.Baked;
         fill.color = Quente;
-        fill.intensity = 0.8f;
+        fill.intensity = 1.1f;
         fill.range = 10f;
         fill.shadows = LightShadows.Soft;
         Vector3 frente = mesa != null ? Vector3.ProjectOnPlane(mesa.position - inicio, Vector3.up).normalized : Vector3.forward;
         fill.transform.position = inicio + frente * 2.5f + Vector3.up * 2.3f;
         log.AppendLine("Luz pontual de preenchimento baked no salão (sem custo em tempo real).");
+
+        // Destaque baked na parede da fissura: clareia a parede em volta para a rachadura preta ter contraste
+        Transform fissura = raiz.Find("Fissura");
+        if (fissura != null)
+        {
+            var destaque = ObterLuz(pai, NomeDestaqueFissura);
+            destaque.type = LightType.Spot;
+            destaque.lightmapBakeType = LightmapBakeType.Baked;
+            destaque.color = new Color(1f, 0.95f, 0.88f);
+            destaque.intensity = 1.6f;
+            destaque.range = 4f;
+            destaque.spotAngle = 70f;
+            destaque.innerSpotAngle = 30f;
+            destaque.shadows = LightShadows.Soft;
+            // 1,6 m à frente da parede e 0,6 m acima, apontando para a rachadura (forward da fissura entra na parede)
+            Vector3 pos = fissura.position - fissura.forward * 1.6f + Vector3.up * 0.6f;
+            destaque.transform.position = pos;
+            destaque.transform.rotation = Quaternion.LookRotation(fissura.position - pos, Vector3.up);
+            log.AppendLine("Spot de destaque baked na parede da fissura.");
+        }
     }
 
     static void CriarProbes(Transform raiz, Transform mesa, Vector3 inicio, StringBuilder log)
@@ -437,12 +459,13 @@ public static class IluminacaoReparoLab
         ls.indirectSampleCount = 128;
         ls.environmentSampleCount = 64;
         ls.maxBounces = 2;
+        ls.indirectScale = 1.25f; // interior um pouco mais claro
         ls.ao = false;
         ls.filteringMode = LightingSettings.FilterMode.Auto;
         ls.autoGenerate = false;
         EditorUtility.SetDirty(ls);
         Lightmapping.lightingSettings = ls;
-        log.AppendLine($"Lighting Settings: {ls.lightmapper}, 12 texels/unidade, lightmap máx. 1024, 16 amostras diretas / 128 indiretas, 2 rebatidas, Subtractive, não-direcional.");
+        log.AppendLine($"Lighting Settings: {ls.lightmapper}, 12 texels/unidade, lightmap máx. 1024, 16 amostras diretas / 128 indiretas, 2 rebatidas (indireta x1,25), Subtractive, não-direcional.");
     }
 
     // ======================================================================
