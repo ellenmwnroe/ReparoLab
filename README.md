@@ -135,6 +135,6 @@ Assets/
 
 - **Modelo 3D do SEBRAELab e projeto base:** fornecidos pelo professor da disciplina.
 - **Fontes:** [Fredoka](https://fonts.google.com/specimen/Fredoka) e [Nunito](https://fonts.google.com/specimen/Nunito), Google Fonts, licença SIL Open Font License (os textos das licenças estão em `Assets/ReparoLab/Fontes`).
-- **Trilha sonora:** _[autor / fonte / licença da música]_
+- **Trilha sonora:** “Can't Stop Rockin'” (Fun Upbeat Game Pop Music), de **HeatleyBros**. Usada com crédito ao autor. A versão em loop (`Assets/ReparoLab/Audio/trilha_loop.wav`) é a mesma faixa, sem o silêncio final.
 - **Efeitos sonoros:** sintetizados especialmente para o projeto (`Assets/ReparoLab/Audio/Sfx`).
 - **XR Interaction Toolkit:** Unity Technologies.
