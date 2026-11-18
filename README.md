@@ -75,6 +75,12 @@ Duração estimada: **3 a 5 minutos**.
   - a **lâmpada queimada zumbe** em loop, em 3D, e o zumbido some quando ela é trocada;
   - som de **vitória** ao liberar o espaço;
   - **trilha de fundo** em loop, 2D e com volume baixo.
+- **Iluminação (leve para o Quest):**
+  - **luz ambiente:** gradiente quente;
+  - **direcional quente** (#FFE2B8): Mixed (Subtractive), entra pela porta;
+  - **lightmap baked** (Progressive GPU, 12 texels/unidade, um só de 512 px): inclui as luminárias emissivas do teto, um spot suave sobre a mesa e uma luz de preenchimento, sem custo em tempo real;
+  - **probes:** 57 Light Probes e 1 Reflection Probe para os objetos dinâmicos;
+  - **em tempo real:** só a direcional, com sombra de 1024 px e alcance curto, e a luz da lâmpada consertada.
 - **Hardware alvo:** Meta Quest 2 (testado no XR Device Simulator).
 - **Performance (Quest 2):**
   - só uma luz pontual nova, que acende quando a lâmpada é consertada;
@@ -109,6 +115,9 @@ Duração estimada: **3 a 5 minutos**.
 | Montar tutorial da Lia | cria as fontes TMP, o painel de diálogo, a seta, os brilhos e o roteiro guiado |
 | Adicionar trilha sonora | música de fundo em loop, com volume baixo |
 | Adicionar sons 3D | liga os efeitos sonoros espaciais aos defeitos, o zumbido da lâmpada e a vitória |
+| Iluminação → 1. Aplicar iluminação | ambiente, direcional, estáticos, emissivos, luzes baked, probes e Lighting Settings |
+| Iluminação → 2. Fazer bake | faz o bake (cancela e volta para a versão sem bake se passar de 10 min) |
+| Iluminação → Desfazer bake | apaga os lightmaps e mantém a versão sem bake |
 | Criar fontes TMP | gera só os Font Assets (Fredoka + Nunito, Latin completo) |
 
 ## Estrutura
