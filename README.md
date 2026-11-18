@@ -70,6 +70,11 @@ Duração estimada: **3 a 5 minutos**.
 - **Locomoção:** teleporte (Teleportation Area sobre o piso) + snap turn do XR Origin.
 - **Interface:** UI World Space — painel de diálogo da Lia que acompanha o jogador, painel de relatório e rótulos 3D.
 - **Guias visuais:** seta flutuante no alvo atual, defeito pulsando, brilho na ferramenta certa.
+- **Áudio espacial:**
+  - os sons de **registro, conserto e ferramenta errada** saem em 3D da posição de cada defeito;
+  - a **lâmpada queimada zumbe** em loop, em 3D, e o zumbido some quando ela é trocada;
+  - som de **vitória** ao liberar o espaço;
+  - **trilha de fundo** em loop, 2D e com volume baixo.
 - **Hardware alvo:** Meta Quest 2 (testado no XR Device Simulator).
 - **Performance (Quest 2):**
   - só uma luz pontual nova, que acende quando a lâmpada é consertada;
@@ -103,6 +108,7 @@ Duração estimada: **3 a 5 minutos**.
 | Preparar cena completa | confere XR Origin, Device Simulator e teleporte, monta o jogo, posiciona os defeitos nas paredes e no teto, salva e configura a Scene List |
 | Montar tutorial da Lia | cria as fontes TMP, o painel de diálogo, a seta, os brilhos e o roteiro guiado |
 | Adicionar trilha sonora | música de fundo em loop, com volume baixo |
+| Adicionar sons 3D | liga os efeitos sonoros espaciais aos defeitos, o zumbido da lâmpada e a vitória |
 | Criar fontes TMP | gera só os Font Assets (Fredoka + Nunito, Latin completo) |
 
 ## Estrutura
@@ -121,4 +127,5 @@ Assets/
 - **Modelo 3D do SEBRAELab e projeto base:** fornecidos pelo professor da disciplina.
 - **Fontes:** [Fredoka](https://fonts.google.com/specimen/Fredoka) e [Nunito](https://fonts.google.com/specimen/Nunito), Google Fonts, licença SIL Open Font License (os textos das licenças estão em `Assets/ReparoLab/Fontes`).
 - **Trilha sonora:** _[autor / fonte / licença da música]_
+- **Efeitos sonoros:** sintetizados especialmente para o projeto (`Assets/ReparoLab/Audio/Sfx`).
 - **XR Interaction Toolkit:** Unity Technologies.
