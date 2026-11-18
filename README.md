@@ -4,7 +4,7 @@ Experiência em **Realidade Virtual** para o **SEBRAELab**, onde o jogador ajuda
 
 Projeto da disciplina **Tecnologias Emergentes** — UNDB, Escola de Tecnologia, semestre 2026.2 (Prof. Marcos Vinicius Januário da Silva).
 
-> **Equipe:** _[nome do grupo]_ — _[integrantes]_
+> **Equipe:** Ellen Monroe, Davi de Jesus, Rodrigo Gois e Telma Regina
 
 ---
 
